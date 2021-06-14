@@ -8,7 +8,7 @@ export WORKDIR=/workspace
 mkdir -p ${WORKDIR}
 cd ${WORKDIR}
 
-SDK_VERSION=19.07.4
+SDK_VERSION=19.07.5
 OPENWRT_SDK=openwrt-sdk-${SDK_VERSION}-ramips-mt7621_gcc-7.5.0_musl.Linux-x86_64
 
 wget https://archive.openwrt.org/releases/${SDK_VERSION}/targets/ramips/mt7621/${OPENWRT_SDK}.tar.xz
