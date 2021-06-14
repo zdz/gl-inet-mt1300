@@ -13,13 +13,16 @@ OPENWRT_SDK=openwrt-sdk-${SDK_VERSION}-ramips-mt7621_gcc-7.5.0_musl.Linux-x86_64
 
 wget https://archive.openwrt.org/releases/${SDK_VERSION}/targets/ramips/mt7621/${OPENWRT_SDK}.tar.xz
 tar -xf ${OPENWRT_SDK}.tar.xz
+
 cd ${WORKDIR}/${OPENWRT_SDK}/package
 
 git clone https://github.com/kenzok8/openwrt-packages.git kenzo
 git clone https://github.com/kenzok8/small.git small
+git clone https://github.com/mwarning/zerotier-openwrt.git zerotier
 
 cd ${WORKDIR}/${OPENWRT_SDK}/
 
+echo "src-git zerotier https://github.com/mwarning/zerotier-openwrt.git" >> ./feeds.conf.default
 echo "src-git kenzo https://github.com/kenzok8/openwrt-packages" >> ./feeds.conf.default
 echo "src-git small https://github.com/kenzok8/small" >> ./feeds.conf.default
 ./scripts/feeds update -a
@@ -50,6 +53,9 @@ chmod +x d.sh
 ./d.sh package/kenzo/luci-theme-argon_new
 ./d.sh package/kenzo/luci-app-argon-config
 
+./d.sh package/zerotier/zerotier
+
+# package
 tar -cjf bin.tar.bz2 bin
 
 mv bin.tar.bz2 /tmp/gl_inet_mt1300_packages.tar.bz2
